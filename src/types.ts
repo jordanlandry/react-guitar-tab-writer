@@ -21,18 +21,20 @@ export type NoteType = {
   slide?: SlideProps;
 };
 
-export type Beat = {
+export type Measure = {
   timeSignature: TimeSignature;
   tempo: number;
-  notes: NoteType[];
-};
+  beats: NoteType[][];
+}
 
 export type Instrument = {
+  tuning: Tuning;
   name: string;
-  beats: Beat[];
+  measures: Measure[];
   volume: number;
 };
 
-export type Song = {
+export type SongType = {
   name: string;
+  instruments: Instrument[];
 };

@@ -1,9 +1,4 @@
-import { useContext } from "react";
 import { NoteType } from "../types";
-import { getNoteName } from "../util/getNoteName";
-
-import * as Tone from "tone";
-import { TuningContext } from "../App";
 
 type Props = {} & NoteType;
 
@@ -17,24 +12,6 @@ export default function Note({
   bend,
   slide,
 }: Props) {
-  const { tuning } = useContext(TuningContext);
-
-  const handlePlayNote = () => {
-    const noteName = getNoteName(tuning, string, fret);
-
-    const play = async () => {
-      await Tone.start();
-
-      const synth = new Tone.Synth().toDestination();
-      const now = Tone.now();
-
-      synth.triggerAttack(noteName, now);
-      synth.triggerRelease(now + 1);
-    };
-
-    play();
-  };
-
   return (
     <div>
       <div>String: {string}</div>
@@ -53,8 +30,6 @@ export default function Note({
           Slide: {slide.to} {slide.duration}
         </div>
       )}
-
-      <button onClick={handlePlayNote}>Play Note</button>
     </div>
   );
 }
